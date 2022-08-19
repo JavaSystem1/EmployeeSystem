@@ -14,17 +14,21 @@ public class Employee implements Serializable {
     private String email;
     private String jobTitle;
     private String phone;
+    private String salary;
+    private String jobSeniority;
     private String imageUrl;
     @Column(nullable = false,updatable = false)
     private String employeeCode;
 
     public Employee() {}
 
-    public Employee(String name, String email, String jobTitle, String phone, String imageUrl, String employeeCode) {
+    public Employee(String name, String email, String jobTitle, String phone, String salary, String jobSeniority, String imageUrl, String employeeCode) {
         this.name = name;
         this.email = email;
         this.jobTitle = jobTitle;
         this.phone = phone;
+        this.salary = salary;
+        this.jobSeniority = jobSeniority;
         this.imageUrl = imageUrl;
         this.employeeCode = employeeCode;
     }
@@ -57,7 +61,7 @@ public class Employee implements Serializable {
         return jobTitle;
     }
 
-    public void setJobTitlel(String jobTitle) {
+    public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
     }
 
@@ -67,6 +71,22 @@ public class Employee implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getSalary() {
+        return salary;
+    }
+
+    public void setSalary(String salary) {
+        this.salary = salary;
+    }
+
+    public String getJobSeniority() {
+        return jobSeniority;
+    }
+
+    public void setJobSeniority(String JobSeniority) {
+        this.jobSeniority = JobSeniority;
     }
 
     public String getImageUrl() {
@@ -93,6 +113,8 @@ public class Employee implements Serializable {
                 ", email ='" + email + '\'' +
                 ", jobTitle ='" + jobTitle + '\'' +
                 ", phone ='" + phone + '\'' +
+                ", salary ='" + salary + '\'' +
+                ", job Seniority ='" + jobSeniority + '\'' +
                 ", imageUrl ='" + imageUrl + '\'' +
                 '}';
     }

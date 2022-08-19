@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   public employees: Employee[];
   public editEmployee: Employee;
   public deleteEmployee: Employee;
+  public date;
 
   constructor(private employeeService: EmployeeService){}
 
@@ -78,7 +79,9 @@ export class AppComponent implements OnInit {
       if (employee.name.toLowerCase().indexOf(key.toLowerCase()) !== -1
       || employee.email.toLowerCase().indexOf(key.toLowerCase()) !== -1
       || employee.phone.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || employee.jobTitle.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+      || employee.jobTitle.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || employee.salary.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      || employee.jobSeniority.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
         results.push(employee);
       }
     }
@@ -105,10 +108,21 @@ export class AppComponent implements OnInit {
       this.deleteEmployee = employee;
       button.setAttribute('data-target', '#deleteEmployeeModal');
     }
+    if (mode === 'rate') {
+      this.editEmployee = employee;
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      let mm = (today.getMonth() + 1).toString(); // Months start at 0!
+
+      if (+mm < 10) {
+        mm = '0' + mm;
+      };
+
+      const formattedToday =  mm + '/' + yyyy;
+      this.date = formattedToday;
+      button.setAttribute('data-target', '#rateEmployeeModal');
+    }
     container.appendChild(button);
     button.click();
   }
-
-
-
 }
