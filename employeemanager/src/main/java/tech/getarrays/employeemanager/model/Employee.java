@@ -16,19 +16,21 @@ public class Employee implements Serializable {
     private String phone;
     private String salary;
     private String jobSeniority;
+    private String rate;
     private String imageUrl;
     @Column(nullable = false,updatable = false)
     private String employeeCode;
 
     public Employee() {}
 
-    public Employee(String name, String email, String jobTitle, String phone, String salary, String jobSeniority, String imageUrl, String employeeCode) {
+    public Employee(String name, String email, String jobTitle, String phone, String salary, String jobSeniority, String rate, String imageUrl, String employeeCode) {
         this.name = name;
         this.email = email;
         this.jobTitle = jobTitle;
         this.phone = phone;
         this.salary = salary;
         this.jobSeniority = jobSeniority;
+        this.rate = rate;
         this.imageUrl = imageUrl;
         this.employeeCode = employeeCode;
     }
@@ -89,6 +91,14 @@ public class Employee implements Serializable {
         this.jobSeniority = JobSeniority;
     }
 
+    public String getRate() {
+        return rate;
+    }
+
+    public void setRate(String rate) {
+        this.rate = rate;
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }
@@ -115,6 +125,7 @@ public class Employee implements Serializable {
                 ", phone ='" + phone + '\'' +
                 ", salary ='" + salary + '\'' +
                 ", job Seniority ='" + jobSeniority + '\'' +
+                ", rate ='" + rate + '\'' +
                 ", imageUrl ='" + imageUrl + '\'' +
                 '}';
     }
