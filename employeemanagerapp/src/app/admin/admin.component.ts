@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee } from './admin/employee';
-import { EmployeeService } from './admin/employee.service';
+import { Employee } from './employee';
+import { EmployeeService } from './employee.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-admin',
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.css']
 })
-export class AppComponent implements OnInit {
+export class AdminComponent implements OnInit {
   public employees: Employee[];
   public editEmployee: Employee;
   public deleteEmployee: Employee;
