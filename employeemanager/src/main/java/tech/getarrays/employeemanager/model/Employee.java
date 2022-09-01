@@ -14,25 +14,25 @@ public class Employee implements Serializable {
     private String email;
     private String jobTitle;
     private String phone;
-    private String salary;
-    private String jobSeniority;
-    private String rate;
+    private Long salary;
+    private Long jobSeniority;
     private String imageUrl;
     @Column(nullable = false,updatable = false)
     private String employeeCode;
+    private Double avgRate;
 
     public Employee() {}
 
-    public Employee(String name, String email, String jobTitle, String phone, String salary, String jobSeniority, String rate, String imageUrl, String employeeCode) {
+    public Employee(String name, String email, String jobTitle, String phone, Long salary, Long jobSeniority, String imageUrl, String employeeCode, Double avgRate) {
         this.name = name;
         this.email = email;
         this.jobTitle = jobTitle;
         this.phone = phone;
         this.salary = salary;
         this.jobSeniority = jobSeniority;
-        this.rate = rate;
         this.imageUrl = imageUrl;
         this.employeeCode = employeeCode;
+        this.avgRate = avgRate;
     }
 
     public Long getId() {
@@ -75,28 +75,20 @@ public class Employee implements Serializable {
         this.phone = phone;
     }
 
-    public String getSalary() {
+    public Long getSalary() {
         return salary;
     }
 
-    public void setSalary(String salary) {
+    public void setSalary(Long salary) {
         this.salary = salary;
     }
 
-    public String getJobSeniority() {
+    public Long getJobSeniority() {
         return jobSeniority;
     }
 
-    public void setJobSeniority(String JobSeniority) {
+    public void setJobSeniority(Long JobSeniority) {
         this.jobSeniority = JobSeniority;
-    }
-
-    public String getRate() {
-        return rate;
-    }
-
-    public void setRate(String rate) {
-        this.rate = rate;
     }
 
     public String getImageUrl() {
@@ -115,6 +107,14 @@ public class Employee implements Serializable {
         this.employeeCode = employeeCode;
     }
 
+    public Double getAvgRate() {
+        return avgRate;
+    }
+
+    public void setAvgRate(Double avgRate) {
+        this.avgRate = avgRate;
+    }
+
     @Override
     public String toString() {
         return "Employee(" +
@@ -125,7 +125,6 @@ public class Employee implements Serializable {
                 ", phone ='" + phone + '\'' +
                 ", salary ='" + salary + '\'' +
                 ", job Seniority ='" + jobSeniority + '\'' +
-                ", rate ='" + rate + '\'' +
                 ", imageUrl ='" + imageUrl + '\'' +
                 '}';
     }

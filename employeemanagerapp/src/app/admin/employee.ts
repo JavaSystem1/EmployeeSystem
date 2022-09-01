@@ -6,9 +6,9 @@ export interface Employee {
   email: string;
   jobTitle: string;
   phone: string;
-  salary: string;
-  jobSeniority: string;
-  rate: string;
+  salary: number;
+  jobSeniority: number;
   imageUrl: string;
   employeeCode: string;
+  avgRate: number;
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from './employee';
+import { Review } from './review';
 import { EmployeeService } from './employee.service';
+import { ReviewService } from './review.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 
@@ -13,12 +15,18 @@ export class AdminComponent implements OnInit {
   public employees: Employee[];
   public editEmployee: Employee;
   public deleteEmployee: Employee;
+
+  public reviews: Review[];
+  public editReview: Review;
+  public deleteReview: Review;
+
   public date;
 
-  constructor(private employeeService: EmployeeService){}
+  constructor(private employeeService: EmployeeService, private reviewService: ReviewService){}
 
   ngOnInit() {
     this.getEmployees();
+    this.getReviews();
   }
 
   public getEmployees(): void {
@@ -26,6 +34,18 @@ export class AdminComponent implements OnInit {
       (response: Employee[]) => {
         this.employees = response;
         console.log(this.employees);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public getReviews(): void {
+    this.reviewService.getReviews().subscribe(
+      (response: Review[]) => {
+        this.reviews = response;
+        console.log(this.reviews);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -46,6 +66,20 @@ export class AdminComponent implements OnInit {
         addForm.reset();
       }
     );
+  }
+
+  public onAddReview(addRate: NgForm): void {
+    document.getElementById('add-review-form').click();
+    this.reviewService.addReview(addRate.value).subscribe(
+      (response: Review) => {
+        console.log(response);
+        this.getReviews();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+    window.location.reload();
   }
 
   public onUpdateEmloyee(employee: Employee): void {
@@ -79,9 +113,7 @@ export class AdminComponent implements OnInit {
       if (employee.name.toLowerCase().indexOf(key.toLowerCase()) !== -1
       || employee.email.toLowerCase().indexOf(key.toLowerCase()) !== -1
       || employee.phone.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || employee.jobTitle.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || employee.salary.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || employee.jobSeniority.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+      || employee.jobTitle.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
         results.push(employee);
       }
     }
@@ -110,16 +142,8 @@ export class AdminComponent implements OnInit {
     }
     if (mode === 'rate') {
       this.editEmployee = employee;
-      const today = new Date();
-      const yyyy = today.getFullYear();
-      let mm = (today.getMonth() + 1).toString(); // Months start at 0!
-
-      if (+mm < 10) {
-        mm = '0' + mm;
-      };
-
-      const formattedToday =  mm + '/' + yyyy;
-      this.date = formattedToday;
+      let today = new Date().toISOString().slice(0, 10);
+      this.date = today;
       button.setAttribute('data-target', '#rateEmployeeModal');
     }
     container.appendChild(button);

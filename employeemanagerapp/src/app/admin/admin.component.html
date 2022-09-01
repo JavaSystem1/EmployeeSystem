@@ -6,7 +6,7 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
        <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-             <a class="nav-link" (click)="onOpenModal(null, 'add')">Add Employee <span class="sr-only">(current)</span></a>
+             <a class="nav-link" (click)="onOpenModal(null, 'add')">Add Employee<span class="sr-only">(current)</span></a>
           </li>
        </ul>
        <form class="form-inline my-2 my-lg-0">
@@ -33,7 +33,7 @@
              <li class="list-group-item"><i class="fa fa-phone float-right"></i>Phone : {{employee?.phone}}</li>
              <li class="list-group-item"><i class="fa fa-phone float-right"></i>Salary : {{employee?.salary}} USD</li>
              <li class="list-group-item"><i class="fa fa-phone float-right"></i>Job seniority : {{employee?.jobSeniority}} months</li>
-             <li class="list-group-item"><i class="fa fa-phone float-right"></i>Average rating : {{employee?.rate}}</li>
+             <li class="list-group-item"><i class="fa fa-phone float-right"></i>Average rating : {{employee?.avgRate}} </li>
           </ul>
           <div class="card-body">
            <div class="float-left btn-group btn-group-sm">
@@ -183,23 +183,22 @@
               </button>
            </div>
            <div class="modal-body">
-              <form #rateForm="ngForm">
-                 <input type="hidden" ngModel="{{editEmployee?.name}}" name="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Name">
-                 <input type="hidden" ngModel="{{editEmployee?.id}}" name="id" class="form-control" id="id" placeholder="Email">
-                 <input type="hidden" ngModel="{{editEmployee?.employeeCode}}" name="userCode" class="form-control" id="userCode" placeholder="Email">
-                 <input type="hidden" ngModel="{{editEmployee?.email}}" name="email" class="form-control" id="email" placeholder="Email">
-                 <input type="hidden" ngModel="{{editEmployee?.jobTitle}}" name="jobTitle" class="form-control" id="jobTitle" placeholder="Job title">
-                 <input type="hidden" ngModel="{{editEmployee?.phone}}" name="phone" class="form-control" id="phone" name="phone" placeholder="Phone">
-                 <input type="hidden" ngModel="{{editEmployee?.salary}}" name="salary" class="form-control" id="salary" name="salary" placeholder="Salary">
-                 <input type="hidden" ngModel="{{editEmployee?.jobSeniority}}" name="jobSeniority" class="form-control" id="jobSeniority" name="jobSeniority" placeholder="months">
-                 <input type="hidden" ngModel="{{editEmployee?.imageUrl}}" name="imageUrl" class="form-control" id="imageUrl" placeholder="Image URL">
-                 <div class="form-group">
-                    <label for="rate">grade for {{date}}  (1-10)</label>
-                    <input type="number" ngModel="{{editEmployee?.rate}}" name="rate" class="form-control" id="rate" aria-describedby="rate" placeholder="grade" max="10" min="1">
-                 </div>
+            <form #addRate="ngForm" (ngSubmit)="onAddReview(addRate)">
+               <div class="form-group hide">
+                  <label for="employeeCode"></label>
+                  <input type="hidden" ngModel="{{editEmployee?.employeeCode}}" name="employeeCode" class="form-control" id="employeeCode" placeholder="code" value="{{editEmployee?.employeeCode}}">
+               </div>
+               <div class="form-group">
+                  <label for="rate">grade for {{date}}  (1-10)</label>
+                  <input type="number" ngModel name="rate" class="form-control" id="rate" aria-describedby="rate" placeholder="grade" max="10" min="1">
+               </div>
+               <div class="form-group hide">
+                  <label for="date"></label>
+                  <input type="hidden" ngModel="{{date}}" name="date" class="form-control" id="date" placeholder="Date" value="{{date}}">
+               </div>
                  <div class="modal-footer">
-                    <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
-                    <button (click)="onUpdateEmloyee(rateForm.value)" data-dismiss="modal" class="btn btn-warning">Rate employee</button>
+                  <button type="button" id="add-review-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button [disabled]="addRate.invalid" type="submit" class="btn btn-primary" >Save changes</button>
                  </div>
               </form>
            </div>
