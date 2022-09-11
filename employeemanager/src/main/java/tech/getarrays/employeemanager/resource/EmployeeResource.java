@@ -16,6 +16,8 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -101,6 +103,16 @@ public class EmployeeResource {
         for (int i = 0; i < employees.size(); i++) {
             employees.get(i).setCurrencies();
         }
+        
+        //sorting employees by highest avg rate
+        Collections.sort(employees, new Comparator<Employee>() {
+            @Override
+            public int compare(Employee e1, Employee e2) {
+                return Double.compare(e1.getAvgRate(), e2.getAvgRate());
+            }
+        });
+        Collections.reverse(employees);
+
 
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
