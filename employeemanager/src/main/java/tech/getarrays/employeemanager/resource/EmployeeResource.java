@@ -101,7 +101,6 @@ public class EmployeeResource {
         });
         Collections.reverse(employees);
 
-
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
