@@ -15,4 +15,6 @@ export interface Employee {
   bonus: number;
   lastBonusDate: string;
   last3MonthsAvgRate: number;
+  dateOfCreation: number;
+  currenciesApiResponse: string;
 }

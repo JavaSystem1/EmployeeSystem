@@ -1,5 +1,7 @@
 package tech.getarrays.employeemanager.resource;
 
+//import okhttp3.*;
+import org.json.simple.parser.ParseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +10,11 @@ import tech.getarrays.employeemanager.model.Review;
 import tech.getarrays.employeemanager.service.EmployeeService;
 import tech.getarrays.employeemanager.service.ReviewService;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +31,7 @@ public class EmployeeResource {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Employee>> getAllEmployees () {
+    public ResponseEntity<List<Employee>> getAllEmployees () throws URISyntaxException, IOException, ParseException {
         List<Employee> employees = employeeService.findAllEmployees();
         //calculate avgRate
         List<Review> reviewTmp = reviewService.findAllReviews();
@@ -90,6 +97,10 @@ public class EmployeeResource {
         }
         //check for updating job seniority
 
+        //Currency REST API
+        for (int i = 0; i < employees.size(); i++) {
+            employees.get(i).setCurrencies();
+        }
 
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
