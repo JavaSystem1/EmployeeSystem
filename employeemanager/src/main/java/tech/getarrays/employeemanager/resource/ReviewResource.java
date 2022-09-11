@@ -36,22 +36,6 @@ public class ReviewResource {
     @PostMapping("/add")
     public ResponseEntity<Review> addReview(@RequestBody Review review) {
         Review review1 = reviewService.addReview(review);
-        List<Employee> employees = employeeService.findAllEmployees();
-        List<Review> reviewTmp = reviewService.findAllReviews();
-        double avgRate = 0.0;
-        int iterator = 0;
-        for (int i = 0; i < employees.size(); i++) {
-            iterator = 0;
-            avgRate = 0.0;
-            for (int j = 0; j < reviewTmp.size(); j++) {
-                if(true) {
-                    avgRate += reviewTmp.get(j).getRate();
-                    iterator++;
-                }
-            }
-            avgRate /= iterator;
-            employees.get(i).setAvgRate(9.5);
-        }
         return new ResponseEntity<>(review1, HttpStatus.CREATED);
     }
 

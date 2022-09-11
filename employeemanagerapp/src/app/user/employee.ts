@@ -11,8 +11,4 @@ export interface Employee {
   imageUrl: string;
   employeeCode: string;
   avgRate: number;
-  shouldHaveBonus: boolean;
-  bonus: number;
-  lastBonusDate: string;
-  last3MonthsAvgRate: number;
 }

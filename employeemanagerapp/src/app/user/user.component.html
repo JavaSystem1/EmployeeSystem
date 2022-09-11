@@ -2,5 +2,32 @@
     <a class="navbar-brand" style="color:white;">Employee Manager</a>
 </nav>
   <div class="container" id="main-container">
-  
+    <div class="row">
+      <div *ngFor="let employee of employees" class="col-md-12 col-xl-12">
+         <div class="card">
+            <div class="card-body row">
+               <div class="col-12 cynter">
+                  <img src="{{employee?.imageUrl}}" alt="" class="img-fluid rounded-circle w-60">
+               </div>
+               <div class="col-12 cynter">
+                  <h5>{{employee?.name}}</h5>
+                  <p class="m-0">{{employee?.jobTitle}}</p>
+                </div>
+            </div>
+            <ul class="list-group list-group-flush">
+               <li class="list-group-item cynter">{{employee?.email}}</li>
+               <li class="list-group-item cynter">Phone : {{employee?.phone}}</li>
+               <li class="list-group-item cynter">Salary : {{employee?.salary}} USD</li>
+               <li class="list-group-item cynter">Job seniority : {{employee?.jobSeniority}} months</li>
+               <li class="list-group-item cynter">Average rating : {{employee?.avgRate}} </li>
+            </ul>
+         </div>
+      </div>
+      <div *ngFor="let review of reviews" class="col-md-12 col-xl-12">
+           <ul class="list-group list-group-flush">
+              <li class="list-group-item cynter">Rate: {{review?.rate}} Date: {{review?.date}}</li>
+              <br>
+           </ul>
+     </div>
+    </div>
   </div>

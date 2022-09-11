@@ -34,10 +34,15 @@
              <li class="list-group-item"><i class="fa fa-phone float-right"></i>Salary : {{employee?.salary}} USD</li>
              <li class="list-group-item"><i class="fa fa-phone float-right"></i>Job seniority : {{employee?.jobSeniority}} months</li>
              <li class="list-group-item"><i class="fa fa-phone float-right"></i>Average rating : {{employee?.avgRate}} </li>
+             <li class="list-group-item"><i class="fa fa-phone float-right"></i>Should have prize : {{employee?.shouldHaveBonus}} </li>
+             <li class="list-group-item"><i class="fa fa-phone float-right"></i>Prize proposition : {{employee?.bonus}} USD </li>
+             <li class="list-group-item"><i class="fa fa-phone float-right"></i>Last 3 Months AvgRate: {{employee?.last3MonthsAvgRate}} </li>
+             <li class="list-group-item"><i class="fa fa-phone float-right"></i>Last bonus date: {{employee?.lastBonusDate}} </li>
           </ul>
           <div class="card-body">
            <div class="float-left btn-group btn-group-sm">
               <a (click)="onOpenModal(employee, 'rate')" class="btn btn-warning tooltips" data-placement="top" data-original-title="Rate"><i class="fa fa-star"></i></a>
+              <a (click)="onOpenModal(employee, 'bonus')" class="btn btn-success tooltips" data-placement="top" data-original-title="Bonus">Reset Bonus</a>
            </div>
              <div class="float-right btn-group btn-group-sm">
                 <a (click)="onOpenModal(employee, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
@@ -205,6 +210,52 @@
         </div>
      </div>
    </div>
+   <!-- Bonus False Modal -->
+   <div class="modal fade" id="bonusFalseEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeEditModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="updateEmployeeModalLabel">There is no prize recomendation. Nothing happened.</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+         </div>
+      </div>
+    </div>
+    <!-- Bonus Modal -->
+   <div class="modal fade" id="bonusEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeEditModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="updateEmployeeModalLabel">Bonus counter has been reseted.</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+            <div class="modal-body">
+               <form #editForm="ngForm">
+                  <input type="hidden" ngModel="{{editEmployee?.id}}" name="id" class="form-control" id="id" placeholder="id">
+                  <input type="hidden" ngModel="{{editEmployee?.name}}" name="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Name">
+                  <input type="hidden" ngModel="{{editEmployee?.email}}" name="email" class="form-control" id="email" placeholder="Email">
+                  <input type="hidden" ngModel="{{editEmployee?.employeeCode}}" name="userCode" class="form-control" id="userCode" placeholder="Email">
+                  <input type="hidden" ngModel="{{editEmployee?.jobTitle}}" name="jobTitle" class="form-control" id="jobTitle" placeholder="Job title">
+                  <input type="hidden" ngModel="{{editEmployee?.phone}}" name="phone" class="form-control" id="phone" name="phone" placeholder="Phone">
+                  <input type="hidden" ngModel="{{editEmployee?.salary}}" name="salary" class="form-control" id="salary" name="salary" placeholder="Salary">
+                  <input type="hidden" ngModel="{{editEmployee?.jobSeniority}}" name="jobSeniority" class="form-control" id="jobSeniority" name="jobSeniority" placeholder="months">
+                  <input type="hidden" ngModel="{{editEmployee?.imageUrl}}" name="imageUrl" class="form-control" id="imageUrl" placeholder="Image URL">
+                  <input type="hidden" ngModel="{{editEmployee?.avgRate}}" name="avgRate" class="form-control" id="avgRate" placeholder="Average Rate">
+                  <input type="hidden" ngModel="{{editEmployee?.shouldHaveBonus}}" name="date" class="form-control" id="date" placeholder="Date">
+                  <input type="hidden" ngModel="{{editEmployee?.bonus}}" name="bonus" class="form-control" id="bonus" placeholder="Bonus">
+                  <input type="hidden" ngModel="{{editEmployee?.lastBonusDate}}" name="lastBonusDate" class="form-control" id="lastBonusDate" placeholder="lastBonusDate">
+                  <div class="modal-footer">
+                     <button (click)="onBonusEmloyee(editForm.value)" data-dismiss="modal" class="btn btn-primary">OK</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+    </div>
   
   <!-- Notification for no employees -->
   <div *ngIf="employees?.length == 0" class="col-lg-12 col-md-12 col-xl-12">

@@ -94,6 +94,18 @@ export class AdminComponent implements OnInit {
     );
   }
 
+  public onBonusEmloyee(employee: Employee): void {
+    this.employeeService.bonus(employee).subscribe(
+      (response: Employee) => {
+        console.log(response);
+        this.getEmployees();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
   public onDeleteEmloyee(employeeId: number): void {
     this.employeeService.deleteEmployee(employeeId).subscribe(
       (response: void) => {
@@ -139,6 +151,18 @@ export class AdminComponent implements OnInit {
     if (mode === 'delete') {
       this.deleteEmployee = employee;
       button.setAttribute('data-target', '#deleteEmployeeModal');
+    }
+    if (mode === 'bonus') {
+      this.editEmployee = employee;
+      if(this.editEmployee.shouldHaveBonus === false){
+        button.setAttribute('data-target', '#bonusFalseEmployeeModal');
+      } else if(this.editEmployee.shouldHaveBonus === true) {
+        this.editEmployee.shouldHaveBonus = false;
+        this.editEmployee.lastBonusDate = new Date().toISOString().slice(0, 10);
+        this.editEmployee.bonus = 0;
+        this.employeeService.updateEmployee(this.editEmployee);
+        button.setAttribute('data-target', '#bonusEmployeeModal');
+      }
     }
     if (mode === 'rate') {
       this.editEmployee = employee;

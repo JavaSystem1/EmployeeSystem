@@ -7,6 +7,8 @@ import tech.getarrays.employeemanager.model.Employee;
 import tech.getarrays.employeemanager.repo.EmployeeRepo;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,6 +24,17 @@ public class EmployeeService {
 
     public Employee addEmployee(Employee employee) {
         employee.setEmployeeCode(UUID.randomUUID().toString());
+        LocalDate today = LocalDate.now(); //test
+        employee.setLastBonusDate(today);
+        employee.setDateOfCreation(today);
+        return employeeRepo.save(employee);
+    }
+
+    public Employee bonus(Employee employee) {
+        LocalDate today = LocalDate.now(); //test
+        employee.setLastBonusDate(today);
+        employee.setBonus(0.0);
+        employee.setShouldHaveBonus(false);
         return employeeRepo.save(employee);
     }
 
