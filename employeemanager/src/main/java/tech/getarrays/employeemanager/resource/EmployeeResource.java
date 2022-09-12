@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.getarrays.employeemanager.model.Employee;
 import tech.getarrays.employeemanager.model.Review;
+import tech.getarrays.employeemanager.model.Singleton;
 import tech.getarrays.employeemanager.service.EmployeeService;
 import tech.getarrays.employeemanager.service.ReviewService;
 
@@ -109,8 +110,8 @@ public class EmployeeResource {
 
     @GetMapping("/currency")
     public ResponseEntity<String> getCurrenciesInfo () throws IOException {
-        Employee employee = new Employee();
-        String apiresponse = employee.getCurrenciesJson();
+        Singleton s1 = Singleton.getInstance();
+        String apiresponse = s1.getCurrenciesJson();
         return new ResponseEntity<>(apiresponse, HttpStatus.OK);
     }
 

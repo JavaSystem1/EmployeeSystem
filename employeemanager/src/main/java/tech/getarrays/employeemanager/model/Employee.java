@@ -177,17 +177,6 @@ public class Employee implements Serializable {
         this.dateOfCreation = dateOfCreation;
     }
 
-    public String getCurrenciesJson() throws IOException {
-        OkHttpClient client = new OkHttpClient().newBuilder().build();
-
-        Request request = new Request.Builder()
-                .url("https://api.apilayer.com/fixer/latest?symbols=EUR%2CGBP%2CPLN&base=USD")
-                .addHeader("apikey", "J08ttYyr5n21Z1NbxEi9OVmxZornVgJw")
-                .get()
-                .build();
-        ResponseBody response = client.newCall(request).execute().body();
-        return response.string();
-    }
 
     @Override
     public String toString() {
