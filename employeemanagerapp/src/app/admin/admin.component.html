@@ -32,6 +32,9 @@
              <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{employee?.email}}</li>
              <li class="list-group-item"><i class="fa fa-phone float-right"></i>Phone : {{employee?.phone}}</li>
              <li class="list-group-item"><i class="fa fa-phone float-right"></i>Salary : {{employee?.salary}} USD</li>
+             <li class="list-group-item"><i class="fa fa-phone float-right"></i>Salary : {{employee?.salary*currencies.rates.PLN | number:'1.0-2'}} PLN</li>
+             <li class="list-group-item"><i class="fa fa-phone float-right"></i>Salary : {{employee?.salary*currencies.rates.EUR | number:'1.0-2'}} EUR</li>
+             <li class="list-group-item"><i class="fa fa-phone float-right"></i>Salary : {{employee?.salary*currencies.rates.GBP | number:'1.0-2'}} GBP</li>
              <li class="list-group-item"><i class="fa fa-phone float-right"></i>Job seniority : {{employee?.jobSeniority}} months</li>
              <li class="list-group-item"><i class="fa fa-phone float-right"></i>Average rating : {{employee?.avgRate}} </li>
              <li class="list-group-item"><i class="fa fa-phone float-right"></i>Should have prize : {{employee?.shouldHaveBonus}} </li>

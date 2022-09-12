@@ -1,18 +1,20 @@
 package tech.getarrays.employeemanager.resource;
 
+import org.json.simple.parser.ParseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.getarrays.employeemanager.model.Employee;
 import tech.getarrays.employeemanager.model.Review;
+import tech.getarrays.employeemanager.model.Singleton;
 import tech.getarrays.employeemanager.service.EmployeeService;
 import tech.getarrays.employeemanager.service.ReviewService;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/employee")
@@ -26,7 +28,7 @@ public class EmployeeResource {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Employee>> getAllEmployees () {
+    public ResponseEntity<List<Employee>> getAllEmployees () throws IOException, ParseException {
         List<Employee> employees = employeeService.findAllEmployees();
         //calculate avgRate
         List<Review> reviewTmp = reviewService.findAllReviews();
@@ -92,6 +94,7 @@ public class EmployeeResource {
         }
         //check for updating job seniority
 
+
         //sorting employees by highest avg rate
         Collections.sort(employees, new Comparator<Employee>() {
             @Override
@@ -102,6 +105,13 @@ public class EmployeeResource {
         Collections.reverse(employees);
 
         return new ResponseEntity<>(employees, HttpStatus.OK);
+    }
+
+    @GetMapping("/currency")
+    public ResponseEntity<String> getCurrenciesInfo () throws IOException {
+        Singleton s1 = Singleton.getInstance();
+        String apiresponse = s1.getCurrenciesJson();
+        return new ResponseEntity<>(apiresponse, HttpStatus.OK);
     }
 
     @GetMapping("/find/{id}")

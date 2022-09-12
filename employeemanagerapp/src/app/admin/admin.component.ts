@@ -21,12 +21,14 @@ export class AdminComponent implements OnInit {
   public deleteReview: Review;
 
   public date;
+  public currencies;
 
   constructor(private employeeService: EmployeeService, private reviewService: ReviewService){}
 
   ngOnInit() {
     this.getEmployees();
     this.getReviews();
+    this.getCurrencyJSON();
   }
 
   public getEmployees(): void {
@@ -34,6 +36,18 @@ export class AdminComponent implements OnInit {
       (response: Employee[]) => {
         this.employees = response;
         console.log(this.employees);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public async getCurrencyJSON() {
+    this.employeeService.getCurrency().subscribe(
+      (response: string) => {
+        this.currencies = response;
+        console.log(this.currencies.rates);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

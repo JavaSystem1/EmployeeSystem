@@ -1,9 +1,19 @@
 package tech.getarrays.employeemanager.model;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import okhttp3.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import javax.persistence.*;
+import java.io.IOException;
 import java.io.Serializable;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.Scanner;
 
 @Entity
 public class Employee implements Serializable {
@@ -16,7 +26,7 @@ public class Employee implements Serializable {
     private String email;
     private String jobTitle;
     private String phone;
-    private Long salary;
+    private Long salary; //USD
     private Long jobSeniority;
     private String imageUrl;
     @Column(nullable = false,updatable = false)
@@ -166,6 +176,7 @@ public class Employee implements Serializable {
     public void setDateOfCreation(LocalDate dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
     }
+
 
     @Override
     public String toString() {
