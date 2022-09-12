@@ -14,6 +14,10 @@ export class EmployeeService {
     return this.http.get<Employee[]>(`${this.apiServerUrl}/employee/all`);
   }
 
+  public getCurrency(): Observable<string> {
+    return this.http.get<string>(`${this.apiServerUrl}/employee/currency`);
+  }
+
   public addEmployee(employee: Employee): Observable<Employee> {
     return this.http.post<Employee>(`${this.apiServerUrl}/employee/add`, employee);
   }

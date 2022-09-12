@@ -37,11 +37,10 @@ public class Employee implements Serializable {
     private LocalDate lastBonusDate;
     private Double last3MonthsAvgRate;
     private LocalDate dateOfCreation;
-    private String currenciesApiResponse;
 
     public Employee() {}
 
-    public Employee(String name, String email, String jobTitle, String phone, Long salary, Long jobSeniority, String imageUrl, String employeeCode, Double avgRate, Boolean shouldHaveBonus, Double bonus, LocalDate lastBonusDate, Double last3MonthsAvgRate, LocalDate dateOfCreation, String currenciesApiResponse) {
+    public Employee(String name, String email, String jobTitle, String phone, Long salary, Long jobSeniority, String imageUrl, String employeeCode, Double avgRate, Boolean shouldHaveBonus, Double bonus, LocalDate lastBonusDate, Double last3MonthsAvgRate, LocalDate dateOfCreation) {
         this.name = name;
         this.email = email;
         this.jobTitle = jobTitle;
@@ -56,7 +55,6 @@ public class Employee implements Serializable {
         this.lastBonusDate = lastBonusDate;
         this.last3MonthsAvgRate = last3MonthsAvgRate;
         this.dateOfCreation = dateOfCreation;
-        this.currenciesApiResponse = currenciesApiResponse;
     }
 
     public Long getId() {
@@ -179,25 +177,16 @@ public class Employee implements Serializable {
         this.dateOfCreation = dateOfCreation;
     }
 
-    public String getCurrenciesApiResponse() {
-        return currenciesApiResponse;
-    }
-
-    public void setCurrenciesApiResponse(String dateOfCreation) {
-        this.currenciesApiResponse = currenciesApiResponse;
-    }
-
-    public void setCurrencies() throws IOException, ParseException {
+    public String getCurrenciesJson() throws IOException {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
 
         Request request = new Request.Builder()
                 .url("https://api.apilayer.com/fixer/latest?symbols=EUR%2CGBP%2CPLN&base=USD")
-                .addHeader("apikey", "m7ADMPscxFwZeynlYeOIjsSIyKEnTwfl")
+                .addHeader("apikey", "J08ttYyr5n21Z1NbxEi9OVmxZornVgJw")
                 .get()
                 .build();
         ResponseBody response = client.newCall(request).execute().body();
-        currenciesApiResponse = response.string();
-        System.out.println(currenciesApiResponse);
+        return response.string();
     }
 
     @Override

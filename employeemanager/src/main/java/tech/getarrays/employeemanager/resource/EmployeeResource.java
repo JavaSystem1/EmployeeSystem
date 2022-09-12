@@ -1,6 +1,5 @@
 package tech.getarrays.employeemanager.resource;
 
-//import okhttp3.*;
 import org.json.simple.parser.ParseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,15 +10,10 @@ import tech.getarrays.employeemanager.service.EmployeeService;
 import tech.getarrays.employeemanager.service.ReviewService;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/employee")
@@ -33,7 +27,7 @@ public class EmployeeResource {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Employee>> getAllEmployees () throws URISyntaxException, IOException, ParseException {
+    public ResponseEntity<List<Employee>> getAllEmployees () throws IOException, ParseException {
         List<Employee> employees = employeeService.findAllEmployees();
         //calculate avgRate
         List<Review> reviewTmp = reviewService.findAllReviews();
@@ -99,11 +93,7 @@ public class EmployeeResource {
         }
         //check for updating job seniority
 
-        //Currency REST API
-        for (int i = 0; i < employees.size(); i++) {
-            employees.get(i).setCurrencies();
-        }
-        
+
         //sorting employees by highest avg rate
         Collections.sort(employees, new Comparator<Employee>() {
             @Override
@@ -115,6 +105,13 @@ public class EmployeeResource {
 
 
         return new ResponseEntity<>(employees, HttpStatus.OK);
+    }
+
+    @GetMapping("/currency")
+    public ResponseEntity<String> getCurrenciesInfo () throws IOException {
+        Employee employee = new Employee();
+        String apiresponse = employee.getCurrenciesJson();
+        return new ResponseEntity<>(apiresponse, HttpStatus.OK);
     }
 
     @GetMapping("/find/{id}")
