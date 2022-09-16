@@ -1,19 +1,8 @@
 package tech.getarrays.employeemanager.model;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import okhttp3.*;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import javax.persistence.*;
-import java.io.IOException;
 import java.io.Serializable;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.time.LocalDate;
-import java.util.Scanner;
 
 @Entity
 public class Employee implements Serializable {
@@ -37,6 +26,7 @@ public class Employee implements Serializable {
     private LocalDate lastBonusDate;
     private Double last3MonthsAvgRate;
     private LocalDate dateOfCreation;
+    private Long currentJobSeniority;
 
     public Employee() {}
 
@@ -55,6 +45,7 @@ public class Employee implements Serializable {
         this.lastBonusDate = lastBonusDate;
         this.last3MonthsAvgRate = last3MonthsAvgRate;
         this.dateOfCreation = dateOfCreation;
+        this.currentJobSeniority = jobSeniority;
     }
 
     public Long getId() {
@@ -175,6 +166,14 @@ public class Employee implements Serializable {
 
     public void setDateOfCreation(LocalDate dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
+    }
+
+    public Long getCurrentJobSeniority() {
+        return currentJobSeniority;
+    }
+
+    public void setCurrentJobSeniority(Long currentJobSeniority) {
+        this.currentJobSeniority = currentJobSeniority;
     }
 
 

@@ -24,14 +24,14 @@ public class EmployeeService {
 
     public Employee addEmployee(Employee employee) {
         employee.setEmployeeCode(UUID.randomUUID().toString());
-        LocalDate today = LocalDate.now(); //test
+        LocalDate today = LocalDate.parse("2020-05-05"); //test
         employee.setLastBonusDate(today);
         employee.setDateOfCreation(today);
         return employeeRepo.save(employee);
     }
 
     public Employee bonus(Employee employee) {
-        LocalDate today = LocalDate.now(); //test
+        LocalDate today = LocalDate.parse("2020-05-05"); //test
         employee.setLastBonusDate(today);
         employee.setBonus(0.0);
         employee.setShouldHaveBonus(false);
