@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "--illegal-access",
+      "type": "java.lang.String",
+      "description": "Description for --illegal-access."
+  }
+] }

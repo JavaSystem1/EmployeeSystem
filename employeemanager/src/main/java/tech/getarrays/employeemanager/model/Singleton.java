@@ -9,7 +9,7 @@ import java.io.IOException;
 public class Singleton {
     private static Singleton instance = null;
 
-    private Singleton()
+    Singleton()
     {
         System.out.println("Singleton created");
     }
@@ -27,7 +27,7 @@ public class Singleton {
 
         Request request = new Request.Builder()
                 .url("https://api.apilayer.com/fixer/latest?symbols=EUR%2CGBP%2CPLN&base=USD")
-                .addHeader("apikey", "J08ttYyr5n21Z1NbxEi9OVmxZornVgJw")
+                .addHeader("apikey", "BIgqMQ5mX6tUnWxg8CeupBQbHY08J2W1")
                 .get()
                 .build();
         ResponseBody response = client.newCall(request).execute().body();
